@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct aluno{
+  char nome[50];
+  int matricula;
+  int n1;
+  int n2;
+  int n3;
+  int media;
+};
+
+
+int main(void) {
+  struct aluno a[5];
+
+  int maior = 0;
+  int maior_media = 0;
+  int menor_media = 10;
+  
+  int n = 1;
+  for (int i = 0; i < 5; i++){
+    setbuf(stdin,NULL);
+    printf("Digite o nome do aluno %d: ",n);
+    fgets(a[i].nome, 50, stdin);
+    
+    
+    printf("Digite o nº  da matricula: ");
+    scanf("%d", &a[i].matricula);
+    
+    printf("Digite sua nota da 1 prova: ");
+    scanf("%d", &a[i].n1);
+    
+    printf("Digite sua nota da 2 prova: ");
+    scanf("%d", &a[i].n2);
+    
+    printf("Digite sua nota da 3 prova: ");
+    scanf("%d", &a[i].n3);
+
+    a[i].media = (a[i].n1 + a[i].n2 + a[i].n3)/3;
+    
+    if (a[i].n1 > maior){
+      maior = a[i].n1;
+    }
+    if (a[i].media > maior_media){
+      maior_media = a[i].media;
+    }
+    if (a[i].media < menor_media){
+      menor_media = a[i].media;
+    }
+    
+    printf("\n");
+    n = n + 1;
+  }
+
+  for (int i = 0; i < 5; i++){
+    if (a[i].n1 ==maior){
+      printf("O aluno %d tirou a maior nota na primeira prova\n",i+1);
+    }
+    if (a[i].media ==maior_media){
+      printf("O aluno %d tirou a maior media\n",i+1);
+    }
+    if (a[i].media ==menor_media){
+      printf("O aluno %d tirou a menor media\n",i+1);
+    }
+  }
+  
+  for (int i = 0; i < 5; i++){
+    if (a[i].media >=6){
+      printf("O aluno %d foi aprovado\n",i+1);
+    } else{
+      printf("O aluno %d foi reprovado\n",i+1);
+    }
+  }
+  
+  return 0;
+}
