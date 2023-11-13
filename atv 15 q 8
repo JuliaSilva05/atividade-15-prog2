@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct dados{
+  char nome[50];
+  char endereco[50];
+  int telefone;
+};
+
+int compare(const void *a, const void *b) {
+  return strcmp(((struct dados *)a)->nome, ((struct dados *)b)->nome);
+}
+
+int main(void) {
+  struct dados a[5];
+  int n = 1;
+  for (int i = 0; i < 5; i++){
+    setbuf(stdin,NULL);
+    printf("Digite o nome da pessoa %d: ",n);
+    fgets(a[i].nome,50,stdin);
+    printf("Digite o endereço da pessoa %d: ",n);
+    fgets(a[i].endereco,50,stdin);
+    printf("Digite o telefone da pessoa %d: ",n);
+    scanf("%d",&a[i].telefone);
+    
+    n = n + 1;
+  }
+
+  qsort(a, 5, sizeof(struct dados), compare);
+
+  printf("\nEm ordem alfabética:\n");
+  for (int i = 0; i < 5; i++){
+    printf("Nome: %s", a[i].nome);
+    printf("Endereço: %s", a[i].endereco);
+    printf("Telefone: %d\n", a[i].telefone);
+    printf("\n");
+  }
+  
+  return 0;
+}
