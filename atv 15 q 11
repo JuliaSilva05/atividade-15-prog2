@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct carro{
+  char marca[15];
+  int ano;
+  int preco;
+};
+
+int main(void) {
+  int p;
+  struct carro a[5];
+  int n = 1;
+  for (int i = 0; i < 5; i++){
+    setbuf(stdin, NULL);
+    printf("Digite a marca do carro %d: ",n);
+    fgets(a[i].marca,15,stdin);
+    printf("Digite o ano do carro %d: ",n);
+    scanf("%d",&a[i].ano);
+    printf("Digite o preço do carro %d: ",n);
+    scanf("%d",&a[i].preco);
+    n++;
+    printf("\n");
+  }
+
+  printf("\nDigite valores para comparar, digite 0 para parar\n");
+
+  do {
+    scanf("%d",&p);
+    printf("\nCarros com valores menores que %d: \n",p);
+    for (int i = 0; i < 5; i++){
+      
+      if (a[i].preco < p){
+        printf("\nMarca: %s", a[i].marca);
+        printf("Ano: %d\n",a[i].ano);
+        printf("Preço: %d\n",a[i].preco);
+      }
+    }
+  } while ( p != 0);
+
+  
+  return 0;
+}
