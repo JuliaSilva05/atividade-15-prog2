@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct dados{
+  char nome[50];
+  int idade;
+  char sexo[1];
+  int cpf;
+  char nascimento[10];
+  int codigo_setor;
+  char cargo[30];
+  int salario;
+};
+
+int main(void) {
+  struct dados a;
+
+  printf("Digite o nome do funcionário: ");
+  fgets(a.nome, 50, stdin);
+  
+  printf("Digite sua idade: ");
+  scanf("%d",&a.idade);
+  
+  printf("Digite o sexo do funcionário(M/F): ");
+  scanf("%s",&a.sexo[0]);
+  
+  printf("Digite o seu CPF: ");
+  scanf("%d",&a.cpf);
+  setbuf(stdin,NULL);
+  
+  printf("Digite a data de nascimento: ");
+  fgets(a.nascimento,10,stdin);
+  
+  printf("Digite o código do setor: ");
+  scanf("%d",&a.codigo_setor);
+  
+  printf("Digite o seu cargo: ");
+  setbuf(stdin,NULL);
+  fgets(a.cargo,30,stdin);
+  
+  printf("Digite o seu salário: ");
+  scanf("%d",&a.salario);
+  printf("\n\n");
+
+  printf("Nome: %s",a.nome);
+  printf("Idade: %d\n",a.idade);
+  printf("Sexo: %c\n",a.sexo[0]);
+  printf("CPF: %d\n",a.cpf);
+  printf("Data de nascimento: %s",a.nascimento);
+  printf("Código do setor: %d\n",a.codigo_setor);
+  printf("Cargo: %s",a.cargo);
+  printf("Salário: %d\n",a.salario);
+  
+  return 0;
+}
