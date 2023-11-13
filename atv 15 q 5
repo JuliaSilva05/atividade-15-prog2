@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct vetor {
+  float x;
+  float y;
+  float z;
+};
+
+int main(void) {
+  struct vetor a[2];
+  int numero = 1;
+
+  for (int i = 0; i < 2; i++) {
+    printf("Digite o valor de x%d: ", numero);
+    scanf("%f", &a[i].x);
+    printf("Digite o valor de y%d: ", numero);
+    scanf("%f", &a[i].y);
+    printf("Digite o valor de z%d: ", numero);
+    scanf("%f", &a[i].z);
+    numero++;
+    printf("\n");
+  }  
+  // vetores somando
+  float somaX = a[0].x + a[1].x;
+  float somaY = a[0].y + a[1].y;
+  float somaZ = a[0].z + a[1].z;
+  printf("Soma dos vetores: (%.2f, %.2f, %.2f)\n", somaX, somaY, somaZ);
+  
+  return 0;
+}
