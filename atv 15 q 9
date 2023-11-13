@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct dados{
+  char nome[50];
+  int matricula;
+  float media_final;
+};
+
+int main(void) {
+  //o 3 é temporário
+  struct dados a[10];
+  int n = 1;
+  for (int i = 0; i < 10; i++){
+    setbuf(stdin,NULL);
+    printf("Digite o nome do aluno %d: ",n);
+    fgets(a[i].nome, 50, stdin);
+    printf("Digite a matricula do aluno %d: ",n);
+    scanf("%d",&a[i].matricula);
+    printf("Digite a média final do aluno %d: ",n);
+    scanf("%f",&a[i].media_final);
+    printf("\n");
+    n++;
+  }
+  //fazer um vetor de aprovados e um vetor de reprovados
+  int aprovados[10];
+  int reprovados[10];
+  int j = 0;
+  int k = 0;
+  for (int i = 0; i < 10; i++){
+    if (a[i].media_final >= 5.0){
+      aprovados[j] = a[i].matricula;
+      j++;
+    } else{
+      reprovados[k] = a[i].matricula;
+      k++;
+    }
+  }
+
+  printf("Alunos aprovados:\n");
+  for (int i = 0; i < j; i++){
+    printf("Matrícula %d\n",aprovados[i]);
+    
+  }
+  printf("Alunos reprovados:\n");
+  for (int i = 0; i < k; i++){
+    printf("Matrícula %d\n",reprovados[i]);
+    
+  }
+  
+  return 0;
+}
