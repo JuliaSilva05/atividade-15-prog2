@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct produtos{
+  int codigo;
+  char nome [15];
+  float preco;
+  int quantidade;//estoque
+};
+
+int main(void) {
+  struct produtos a[5] = {
+    {1, "escova", 12.0, 5},
+    {2, "salgado", 5.0, 100},
+    {3, "detergente", 3.5, 25},
+    {4,"livro", 30.75, 12},
+    {5, "caneta", 2.0, 75}
+  };
+
+  printf("Faça um pedido:\n");
+  
+  int procura,quant,preco;
+  do{
+    printf("\nDigite um código de 1 a 5: ");
+    scanf("%d" , &procura);
+    if (procura == 0||procura>5){
+      break;
+    }
+    printf("Digite a quantidade que você quer: ");
+    scanf("%d",&quant);
+    for (int i = 0; i < 5; i++){
+      if (procura == a[i].codigo){
+        if (quant <= a[i].quantidade){
+          preco = a[i].preco * quant;
+          printf("Preço: %d reais\n",preco);
+        } else{
+          printf("Não foi possível fazer a compra, pois você pediu uma quantidade maior que a que temos no estoque\n");
+        }
+      }
+    }
+  } while (procura !=0);
+    
+  
+
+  
+  return 0;
+}
