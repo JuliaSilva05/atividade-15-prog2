@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct livros{
+  char titulo[30];
+  char autor[15];
+  int ano;
+};
+
+int main(void) {
+  struct livros a[5];
+  int n = 1;
+  for(int i=0; i<5; i++){
+    setbuf(stdin, NULL);
+    printf("Digite o titulo do livro %d: ",n);
+    fgets(a[i].titulo, 30, stdin);
+    printf("Digite o autor do livro %d: ",n);
+    fgets(a[i].autor, 15, stdin);;
+    printf("Digite o ano do livro %d: ",n);
+    scanf("%d", &a[i].ano);
+    setbuf(stdin, NULL);
+    printf("\n");
+    n++;
+  }
+  // fazer uma mecanica de pesquisar o livro e printar os dados dele
+  char pesquisa[30];
+  
+  printf("\nPesquise o título: ");
+  fgets(pesquisa, 30, stdin);
+  
+
+  for(int i=0; i<5; i++){
+    if(strstr(a[i].titulo, pesquisa) != NULL){
+      printf("Título: %s", a[i].titulo);
+      printf("Autor: %s", a[i].autor);
+      printf("Ano: %d", a[i].ano);
+      printf("\n");
+    }
+  }
+  return 0;
+}
