@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct eledom{
+  char nome[15];
+  int potencia;
+  int tempo;
+  float consumo;
+//tempo em horas
+};
+
+int main(void) {
+  struct eledom a[3];
+  int dias;
+  int consumo_total = 0;
+  printf("Diga um tempo em dias: ");
+  scanf("%d", &dias);
+  int n = 1;
+  printf("Preencha as informações sobre os eletrodomésticos:\n");
+  for (int i = 0; i < 3; i++){
+    setbuf(stdin, NULL);
+    printf("Nome %d: ",n);
+    fgets(a[i].nome, 15, stdin);
+    printf("Potência %d: ",n);
+    scanf("%d", &a[i].potencia);
+    printf("Tempo de uso em horas %d: ",n);
+    scanf("%d", &a[i].tempo);
+    printf("\n");
+    n++;
+  }
+  //preenchido o struct, vamos calcular o consumo total
+  for (int i = 0; i < 3; i++){
+    a[i].consumo = a[i].potencia * a[i].tempo * dias;
+    consumo_total = consumo_total + a[i].consumo;
+  }
+  n = 1;
+  for (int i = 0; i < 3; i++){
+    a[i].consumo = a[i].consumo / consumo_total;
+    printf("Consumo relativo do eletrodoméstico %d: %.2f %\n",n,a[i].consumo);
+    n++;
+  }
+  printf("Consumo total: %d\n", consumo_total);
+  
+  
+  return 0;
+}
