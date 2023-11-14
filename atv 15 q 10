@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <math.h>
+
+struct cartas{
+  int vida;
+  int forca;
+  int inteligencia;
+  int defesa;
+  int carisma;
+};
+
+int main(void) {
+
+  struct cartas c[52];
+  srand(time(NULL));
+  int i = 0;
+  int n = 1;
+
+  printf("Cartas do Jogador 1: \n");
+  for (int j = 0; j < 2; j++){
+    for(i = 0; i < 5; i++){
+      if (j==1&&i==0){
+        printf("Cartas do Jogador 2: \n");
+        n=1;
+      }
+      printf("Carta %d\n", n);
+      c[i].vida = rand() % 101;
+      printf("Vida: %d\n", c[i].vida);
+      c[i].forca = rand() % 101;
+      printf("Força: %d\n", c[i].forca);
+      c[i].inteligencia = rand() % 101;
+      printf("Inteligência: %d\n", c[i].inteligencia);
+      c[i].defesa = rand() % 101;
+      printf("Defesa: %d\n", c[i].defesa);
+      c[i].carisma = rand() % 101;
+      printf("Carisma: %d\n", c[i].carisma);
+      printf("\n");
+      n++;
+    }
+  }
+
+  return 0;
+}
