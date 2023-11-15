@@ -1,0 +1,236 @@
+//incompleto e em algumas partes errado
+//fiz apenas com 2 nomes pra ficar mais fácil
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct agenda{
+  char nome[50];
+  char email[50];
+  char observacoes[100];
+  struct endereco {
+    char rua[25];
+    int numero;
+    char complemento[15];
+    char bairro[25];
+    char cep[9];
+    char cidade[25];
+    char estado[2];
+    char pais[25];
+  } end[10];
+  struct telefone {
+    int ddd;
+    int num_tel;
+  } tel[10];
+  struct aniversario {
+    int dia;
+    int mes;
+    int ano;
+  } niver[10];
+};
+
+int procura_nome(struct agenda *ag, char *nome){
+  int i;
+  for(i=0;i<10;i++){
+    if(strcmp(ag[i].nome, nome)==0){
+      return i;
+      break;
+    }
+  }
+  return -1;
+}
+void printar(struct agenda *a,int i) {
+  
+  printf("\nNome: %s", a[i].nome);
+  printf("Email: %s", a[i].email);
+  printf("Observações: %s", a[i].observacoes);
+  printf("Endereço: %s", a[i].end[i].rua);
+  printf("Número: %d", a[i].end[i].numero);
+  printf("\nComplemento: %s", a[i].end[i].complemento);
+  printf("Bairro: %s", a[i].end[i].bairro);
+  printf("CEP: %s", a[i].end[i].cep);
+  printf("Cidade: %s", a[i].end[i].cidade);
+  printf("Estado: %s", a[i].end[i].estado);
+  printf("\nPaís: %s", a[i].end[i].pais);
+  printf("Número: %d %d",a[i].tel[i].ddd, a[i].tel[i].num_tel);
+  printf("\nAniversário: %d/%d/%d\n", a[i].niver[i].dia, a[i].niver[i].mes, a[i].niver[i].ano);
+  
+}
+
+void printar_menos(struct agenda *a,int i) {
+
+  printf("\nNome: %s", a[i].nome);
+  printf("Número de telefone: %d %d",a[i].tel[i].ddd, a[i].tel[i].num_tel);
+  printf("\nEmail: %s", a[i].email);
+
+}
+
+//testando
+
+
+int compare(const void *a, const void *b) {
+  return strcmp(((struct agenda *)a)->nome, ((struct agenda *)b)->nome);
+}
+
+//teste
+void inserir(struct agenda *a,int i,int n){
+  
+  setbuf(stdin,NULL);
+  printf("Digite o nome da pessoa %d: ",n);
+  fgets(a[i].nome, 50, stdin);
+  printf("Digite o email da pessoa %d: ",n);
+  fgets(a[i].email, 50, stdin);
+  printf("Digite as observações da pessoa %d: ",n);
+  fgets(a[i].observacoes, 100, stdin);
+  printf("Digite o endereço da pessoa %d: ",n);
+  printf("\nRua: ");
+  fgets(a[i].end[i].rua, 25, stdin);
+  printf("Número: ");
+  scanf("%d", &a[i].end[i].numero);
+  setbuf(stdin,NULL);
+  printf("Complemento: ");
+  fgets(a[i].end[i].complemento, 15, stdin);
+  printf("Bairro: ");
+  setbuf(stdin,NULL);
+  fgets(a[i].end[i].bairro, 25, stdin);
+  printf("CEP: ");
+  fgets(a[i].end[i].cep, 9, stdin);
+  printf("Cidade: ");
+  fgets(a[i].end[i].cidade, 25, stdin);
+  printf("Estado: ");
+  fgets(a[i].end[i].estado, 2, stdin);
+  printf("País: ");
+
+  fgets(a[i].end[i].pais, 25, stdin);
+  printf("Digite o DDD do telefone da pessoa %d: ",n);
+  scanf("%d", &a[i].tel[i].ddd);
+  printf("Digite o número do telefone da pessoa %d: ",n);
+  scanf("%d", &a[i].tel[i].num_tel);
+  printf("Digite o dia do aniversário da pessoa %d: ",n);
+  scanf("%d", &a[i].niver[i].dia);
+  printf("Digite o mês do aniversário da pessoa %d: ",n);
+  scanf("%d", &a[i].niver[i].mes);
+  printf("Digite o ano do aniversário da pessoa %d: ",n);
+  scanf("%d", &a[i].niver[i].ano);
+  n++;
+  printf("\n");
+  n++;
+}
+
+int main(void) {
+
+  struct agenda a[100];
+
+  int opcao,opcao_opcao6;
+  int n = 1;
+  int i,comparar=0;
+  char nome_buscar[50];
+  int mes_buscar, dia_buscar;
+  
+
+  for (int i = 0; i < 2; i++){
+    inserir(a,i,n);
+    n++;
+  }
+
+  do{
+    printf("\nDigite 1 para pesquisar um nome\n");
+    printf("Digite 2 para pesquisar por mês de aniversário\n");
+    printf("Digite 3 para pesquisar por dia e mês de aniversário\n");
+    printf("Digite 4 para adicionar uma nova pessoa\n");
+    printf("Digite 5 para remover uma pessoa\n");
+    printf("Digite 6 para imprimir agenda\n");//precisa ter opcao de imprimir nome, telefone e email ou todos os dados
+    printf("Digite 7 para sair\n");
+    
+    printf("\nDigite a opção desejada: ");
+    scanf("%d",&opcao);
+    switch(opcao){
+      case 1:
+      setbuf(stdin,NULL);
+        comparar = 0;
+      printf("Digite o nome da pessoa que deseja pesquisar: ");
+      fgets(nome_buscar, 50, stdin);
+      for (i = 0; i < n; i++){
+        if (strcmp(nome_buscar, a[i].nome) == 0){
+          printar(a,i);
+          comparar++;
+        }
+      }
+        if (comparar ==0){
+          printf("Nome não encontrado\n");
+          break;
+        }
+        break;
+
+      case 2:
+        printf("Digite o mês que deseja pesquisar: ");
+        scanf("%d", &mes_buscar);
+        comparar = 0;
+      
+        for (i = 0; i < n; i++){
+          if (mes_buscar == a[i].niver[i].mes){
+            printar(a,i);
+            comparar++;
+          } 
+          if (comparar ==0){
+            printf("Mês não encontrado\n");
+            break;
+          }
+        }
+        break;
+
+      case 3:
+        comparar = 0;
+        printf("Diga um mês e um dia\n");
+        printf("Mês: ");
+        scanf("%d", &mes_buscar);
+        printf("Dia: ");
+        scanf( "%d", &dia_buscar);
+        for (i = 0; i < n; i++){
+          if (mes_buscar == a[i].niver[i].mes && dia_buscar == a[i].niver[i].dia){
+            printar(a,i);
+            comparar++;
+          } 
+          if (comparar ==0){
+            printf("Mês e dia não encontrados\n");
+            break;
+          }
+        }
+      break;
+
+      case 6:
+        printf("Printar tudo ou apenas nome, telefone e email?\n");
+        printf("Digite 1 para printar todos\n");
+        printf("Digite 2 para printar apenas nome, telefone e email\n");
+        scanf("%d" , &opcao_opcao6);
+        switch(opcao_opcao6){
+          case 1:
+            for (int i = 0; i<2; i++){
+              printar(a,i);
+            }
+            break;
+          case 2:
+            for (int i = 0; i<2;i++){
+              printar_menos(a,i);
+            }
+            
+        }
+          
+        //inserir(a,i,n);
+        //qsort(a, 5, sizeof(struct agenda), compare);
+        
+        
+        
+        break;
+        
+
+      
+    }
+    
+  } while (opcao != 7);
+  
+
+  
+  return 0;
+}
