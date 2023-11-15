@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+struct receitas{
+  char nome[25];
+  int quant_ingredientes;
+  struct ingredient {
+    char nome[25];
+    int quantidade;
+  } ingredientes[10];
+};
+
+  // Search for recipes by name
+char search_recipe(struct receitas* recipes, int num_recipes, char* recipe_name) {
+    for (int i = 0; i < num_recipes; i++) {
+        if (strcmp(recipes[i].nome, recipe_name) == 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int main(void) {
+  struct receitas a[3];
+
+  // Read recipe names and the quantity of ingredients
+  for(int i = 0; i < 3; i++) {
+    setbuf(stdin, NULL);
+    printf("Digite o nome da receita: ");
+    fgets(a[i].nome, 25, stdin);
+    printf("Digite a quantidade de ingredientes: ");
+    scanf("%d", &a[i].quant_ingredientes);
+    // Read and store the ingredients for each recipe
+    for(int j = 0; j < a[i].quant_ingredientes; j++) {
+      setbuf(stdin, NULL);
+      printf("Digite o nome do ingrediente %d: ", j+1);
+      fgets(a[i].ingredientes[j].nome, 25, stdin);
+      printf("Digite a quantidade do ingrediente %d: ", j+1);
+      scanf("%d", &a[i].ingredientes[j].quantidade);
+    }
+  }
+  // Search for recipes by name
+  char recipe_name[25];
+  
+  do {
+    printf("\nDigite o nome da receita a ser pesquisada: ");
+  setbuf(stdin, NULL);
+    fgets(recipe_name, 25, stdin);
+    int res = search_recipe(a, 3, recipe_name);
+    
+    if (res != -1) {
+      printf("\n\nReceita encontrada: %s", a[res].nome);
+      printf("Ingredientes:\n");
+      // Print the ingredients for each recipe
+      for (int i = 0; i < a[res].quant_ingredientes; i++) {
+        printf("%s -> %d\n", a[res].ingredientes[i].nome, a[res].ingredientes[i].quantidade);
+      }
+    } else{
+      printf("Receita não encontrada.\n");
+    } 
+  }while (strcmp(recipe_name, "\n") != 0);
+  
+  
+  return 0;
+}
